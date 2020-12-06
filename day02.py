@@ -1,44 +1,55 @@
 # -*- coding: utf-8 -*-
 import utils
-import math
-from functools import reduce
 
-input = utils.get_input_oneline_int(2)
+input = utils.get_input_multiline_str(2)
 
 
-# input = [1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50]
+# input = sample input
+
+def count_char_in_str(char, string):
+    count = 0
+    for i in string:
+        if i == char:
+            count = count + 1
+    return count
 
 
 def first():
-    input[1] = 12
-    input[2] = 2
-    return get_output(input.copy())
+    valid = 0
+    for line in input:
+        parts = line.split(': ')
+        policy = parts[0].split(' ')
+        num = policy[0].split('-')
+        min = int(num[0])
+        max = int(num[1])
+        char = policy[1]
+        password = parts[1]
+        num_of_char = count_char_in_str(char, password)
+        if min <= num_of_char <= max:
+            valid += 1
+    return valid
 
 
 def second():
-    for i in range(0, 100):
-        for j in range(0, 100):
-            input[1] = i
-            input[2] = j
-            try:
-                if get_output(input.copy()) == 19690720:
-                    return 100 * i + j
-            except IndexError:
-                continue
-
-
-def get_output(input):
-    for i in range(0, len(input), 4):
-        p = input[i:i + 4]
-        if p[0] == 1:
-            input[p[3]] = input[p[1]] + input[p[2]]
-        elif p[0] == 2:
-            input[p[3]] = input[p[1]] * input[p[2]]
-        elif p[0] == 99:
-            break
-    return input[0]
+    valid = 0
+    for line in input:
+        parts = line.split(': ')
+        policy = parts[0].split(' ')
+        num = policy[0].split('-')
+        first = int(num[0])
+        second = int(num[1])
+        char = policy[1]
+        password = parts[1]
+        check = 0
+        if password[first - 1] == char:
+            check += 1
+        if password[second - 1] == char:
+            check += 1
+        if check == 1:
+            valid += 1
+    return valid
 
 
 if __name__ == '__main__':
-    print('First: {}'.format(first()))
+    # print('First: {}'.format(first()))
     print('Second: {}'.format(second()))

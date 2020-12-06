@@ -1,29 +1,25 @@
 # -*- coding: utf-8 -*-
 import utils
-import math
-from functools import reduce
 
 input = utils.get_input_multiline_int(1)
-#input = [100756]
+
+
+# input = sample input
 
 
 def first():
-    result = reduce(lambda x, y: x + y, map(lambda x: math.floor(x / 3) - 2, input))
-    return result
+    for i in range(0, len(input)):
+        for j in range(i, len(input)):
+            if input[i] + input[j] == 2020:
+                print(input[i], input[j], input[i] * input[j])
 
 
 def second():
-    result = reduce(lambda x, y: x + y, map(cal_full_mass, input))
-    return result
-
-
-def cal_full_mass(x):
-    total = 0
-    mass = math.floor(x / 3) - 2
-    while mass > 0:
-        total += mass
-        mass = math.floor(mass / 3) - 2
-    return total
+    for i in range(0, len(input)):
+        for j in range(i, len(input)):
+            for k in range(j, len(input)):
+                if input[i] + input[j] + input[k] == 2020:
+                    print(input[i], input[j], input[k], input[i] * input[j] * input[k])
 
 
 if __name__ == '__main__':
