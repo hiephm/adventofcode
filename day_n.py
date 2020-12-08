@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import utils
 
-input = utils.get_input(n)
+input = ''''''
 
-
-# input = sample input
-
+#input = utils.get_input_multiline_str(n)
 
 def first():
     return ''
