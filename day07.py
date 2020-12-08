@@ -4,15 +4,15 @@ import re
 input = utils.get_input_multiline_str(7)
 
 
-input = '''light red bags contain 1 bright white bag, 2 muted yellow bags.
-dark orange bags contain 3 bright white bags, 4 muted yellow bags.
-bright white bags contain 1 shiny gold bag.
-muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
-shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.
-dark olive bags contain 3 faded blue bags, 4 dotted black bags.
-vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
-faded blue bags contain no other bags.
-dotted black bags contain no other bags.'''.split('\n')
+# input = '''light red bags contain 1 bright white bag, 2 muted yellow bags.
+# dark orange bags contain 3 bright white bags, 4 muted yellow bags.
+# bright white bags contain 1 shiny gold bag.
+# muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
+# shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.
+# dark olive bags contain 3 faded blue bags, 4 dotted black bags.
+# vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
+# faded blue bags contain no other bags.
+# dotted black bags contain no other bags.'''.split('\n')
 
 
 def first():
@@ -48,25 +48,33 @@ def first():
 
 allbags = {}
 for line in input:
-    result = re.match('^(.*) bags contain (\d+ .* bag[s]?)\.$', line)
+    result = re.match('^(.*) bags contain ((?:\d+|no) .* bag[s]?)\.$', line)
     if result:
         parent = result.group(1)
         allbags[parent] = []
         children = result.group(2).split(', ')
         for child in children:
-            result = re.match('^(\d+) (.*) bag[s]?$', child)
+            result = re.match('^(\d+|no) (.*) bag[s]?$', child)
             if result:
-                allbags[parent].append((int(result.group(1)), result.group(2)))
+                qty = int(result.group(1)) if result.group(1) != 'no' else 0
+                allbags[parent].append((qty, result.group(2)))
 
-def second(child):
+def second(parent):
     total = 0
-    children = allbags.get(child)
-    if not children:
-        return 1
+    children = allbags.get(parent)
+    print(parent, '====> ', children)
+    is_empty_bag = False
     for c, b in children:
         print(c, b)
-        total += c * second(b)
-        print(total)
+        if c == 0:
+            total += 1
+            is_empty_bag = True
+            break
+        else:
+            total += c * second(b)
+    if not is_empty_bag and parent != 'shiny gold':
+        total += 1
+    print('>>>>> ', total)
     return total
 
 
