@@ -3,7 +3,9 @@ import utils
 
 input = ''''''
 
-#input = utils.get_input_multiline_str(n)
+input = utils.get_input(n)
+
+input = utils.get_multiline_str(input)
 
 def first():
     return ''

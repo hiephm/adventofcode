@@ -25,6 +25,14 @@ def get_input(day, to_lines=False):
         return raw
 
 
+def get_multiline_int(input):
+    return list(map(int, input.split('\n')))
+
+
+def get_multiline_str(input):
+    return input.split('\n')
+
+
 def get_input_multiline_int(day):
     lines = get_input(day, True)
     return list(map(int, lines))
