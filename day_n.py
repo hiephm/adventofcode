@@ -3,7 +3,7 @@ import utils
 
 input = ''''''
 
-input = utils.get_input(n)
+#input = utils.get_input(n)
 
 input = utils.get_multiline_str(input)
 
