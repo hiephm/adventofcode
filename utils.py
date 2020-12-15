@@ -43,8 +43,8 @@ def get_input_multiline_str(day):
     return lines
 
 
-def get_input_oneline_int(day):
-    items = get_input(day).split(',')
+def get_oneline_int(input):
+    items = input.split(',')
     return list(map(int, items))
 
 
