@@ -15,7 +15,7 @@ def get_input(day, to_lines=False):
         headers = {
             'Cookie': os.getenv('COOKIE')
         }
-        resp = requests.get('https://adventofcode.com/2020/day/{}/input'.format(day), headers=headers)
+        resp = requests.get('https://adventofcode.com/2022/day/{}/input'.format(day), headers=headers)
         raw = resp.text.strip()
         with open(cache_file, 'w') as f:
             f.write(raw)
