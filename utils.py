@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import requests
@@ -46,6 +47,11 @@ def get_input_multiline_str(day):
 def get_oneline_int(input):
     items = input.split(',')
     return list(map(int, items))
+
+
+def pretty_print(arr):
+    for line in arr:
+        print(''.join(line))
 
 
 if __name__ == '__main__':
