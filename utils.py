@@ -54,5 +54,10 @@ def pretty_print(arr):
         print(''.join(line))
 
 
+def print_list(arr):
+    for line in arr:
+        print(line)
+
+
 if __name__ == '__main__':
     print(get_input(4))
