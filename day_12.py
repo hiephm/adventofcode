@@ -36,7 +36,7 @@ def first():
     for i in range(0, rows):
         for j in range(0, cols):
             neighbours = []
-            if i > 0 and ord(input[i-1][j]) - ord(input[i][j]) <= 1:
+            if i > 0 and ord(input[i - 1][j]) - ord(input[i][j]) <= 1:
                 neighbours.append('{}-{}'.format(i - 1, j))
             if i < rows - 1 and ord(input[i + 1][j]) - ord(input[i][j]) <= 1:
                 neighbours.append('{}-{}'.format(i + 1, j))
@@ -49,7 +49,7 @@ def first():
 
     print('Start: ', start)
     print('End: ', end)
-    # path = BFS_SP(graph, start, end)
+    #path = BFS_SP(graph, start, end)
     path = shortest_path(graph, start, end)
 
     # for k, v in graph.items():
@@ -74,7 +74,7 @@ def second():
     for i in range(0, rows):
         for j in range(0, cols):
             neighbours = []
-            if i > 0 and ord(input[i-1][j]) - ord(input[i][j]) <= 1:
+            if i > 0 and ord(input[i - 1][j]) - ord(input[i][j]) <= 1:
                 neighbours.append('{}-{}'.format(i - 1, j))
             if i < rows - 1 and ord(input[i + 1][j]) - ord(input[i][j]) <= 1:
                 neighbours.append('{}-{}'.format(i + 1, j))
@@ -85,7 +85,7 @@ def second():
 
             graph['{}-{}'.format(i, j)] = neighbours
 
-    shortest = [0]*1000
+    shortest = [0] * 1000
     for start in starts:
         path = shortest_path(graph, start, end)
         if path and len(path) < len(shortest):
@@ -171,6 +171,9 @@ def BFS_SP(graph, start, goal):
     return None
 
 
+# Readmore:
+# https://medium.com/free-code-camp/exploring-the-applications-and-limits-of-breadth-first-search-to-the-shortest-paths-in-a-weighted-1e7b28b3307
+
 if __name__ == '__main__':
     print('First: {}'.format(first()))
-    print('Second: {}'.format(second()))
+    #print('Second: {}'.format(second()))
