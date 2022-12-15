@@ -22,7 +22,7 @@ input = utils.get_input(15)
 input = utils.get_multiline_str(input)
 
 
-class Beacon:
+class Sensor:
     def __init__(self, sx, sy, bx, by):
         self.sx = int(sx)
         self.sy = int(sy)
@@ -40,20 +40,20 @@ def is_overlap(seg1, seg2):
     return min(seg1[0], seg2[0]), max(seg1[1], seg2[1])
 
 
-beacons = []
+sensors = []
 for line in input:
     sx, sy, bx, by = re.findall('\d+', line)
-    beacons.append(Beacon(sx, sy, bx, by))
+    sensors.append(Sensor(sx, sy, bx, by))
 
 
 def first(target_row):
     segments = []
-    for b in beacons:
-        distance_to_target_row = abs(b.sy - target_row)
-        cross_over = b.radius - distance_to_target_row
+    for sensor in sensors:
+        distance_to_target_row = abs(sensor.sy - target_row)
+        cross_over = sensor.radius - distance_to_target_row
         if cross_over >= 0:
             # print(b, "Cross over:", cross_over, "Overlap range:", b.sx - cross_over, b.sx + cross_over)
-            current_seg = (b.sx - cross_over, b.sx + cross_over)
+            current_seg = (sensor.sx - cross_over, sensor.sx + cross_over)
             for i in range(0, len(segments)):
                 if segments[i]:
                     new_seg = is_overlap(segments[i], current_seg)
